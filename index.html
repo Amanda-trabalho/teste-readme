@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <style>
+        #mapid {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+    <title>Leaflet Map</title>
+</head>
+<body>
+    <h1>Localização no Mapa:</h1>
+    <div id="mapid"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+    <script>
+        var map = L.map('mapid').setView([-15.727098690628502,-48.243382111033497 ], 10);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+
+
+var nomeFuncao = {
+  "type": "FeatureCollection",                 // primeiro poligono
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            -50.77506195285784,
+            -15.813176013412473
+          ],
+          [
+            -51.186221260127695,
+            -16.970354489619865
+          ],
+          [
+            -49.059367541361866,
+            -16.885030945786028
+          ],
+          [
+            -48.990982432139134,
+            -15.700591016278977
+          ],
+          [
+            -50.77506195285784,
+            -15.813176013412473
+          ]
+        ],
+        "type": "LineString"
+      }
+    },
+    {
+      "type": "Feature",                        // segundo poligono
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            -50.7769764297916,
+            -15.103761721442979
+          ],
+          [
+            -52.17659576492824,
+            -17.438604784164937
+          ],
+          [
+            -47.985495929262015,
+            -17.657585931053802
+          ],
+          [
+            -47.87596342249671,
+            -15.3394724784132
+          ],
+          [
+            -50.83718449402818,
+            -15.132947885466535
+          ]
+        ],
+        "type": "LineString"
+      }
+    },
+    {
+      "type": "Feature",                             //terceiro poligono
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            -51.39327910763211,
+            -14.589695265487805
+          ],
+          [
+            -53.57427334160701,
+            -17.859414454062218
+          ],
+          [
+            -47.44601364217618,
+            -18.47951315848114
+          ],
+          [
+            -47.22399754493276,
+            -14.943967779379193
+          ],
+          [
+            -51.468479161960516,
+            -14.589300747824467
+          ]
+        ],
+        "type": "LineString"
+      }
+    },
+    {
+      "type": "Feature",                             //quarto poligono separado
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            -54.66501123640961,
+            -14.534116868286446
+          ],
+          [
+            -54.87057526510701,
+            -15.13224147910303
+          ],
+          [
+            -54.08958862325741,
+            -15.181744902623933
+          ],
+          [
+            -54.022424593995,
+            -14.418561140949876
+          ],
+          [
+            -54.679609432469334,
+            -14.445085981358929
+          ]
+        ],
+        "type": "LineString"
+      }
+    }
+  ]
+};
+
+        L.geoJSON(nomeFuncao).addTo(map);
+
+        // Criando um popup global
+        var popup = L.popup();
+
+        // Função para exibir o popup na posição do clique
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at " + e.latlng.toString())
+                .openOn(map);
+        }
+
+        // Adiciona o evento de clique ao mapa
+        map.on('click', onMapClick);
+    </script>
+</body>
+</html>
